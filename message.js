@@ -15,6 +15,7 @@ const sendMessage = async function (receive_id, content, msg_type = 'text') {
     content: JSON.stringify(content),
     msg_type,
   })
+  return res.data.data
 }
 const deleteMessage = async function (messageId) {
   const url = `https://open.feishu.cn/open-apis/im/v1/messages/${messageId}`
