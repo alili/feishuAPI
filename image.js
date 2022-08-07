@@ -1,6 +1,6 @@
 async function uploadImage({ type, url }) {
   const formData = new FormData()
-  let image = await axios({
+  let image = await this.axios({
     url: url,
     method: 'get',
     responseType: 'stream',
