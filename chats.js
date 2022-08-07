@@ -20,7 +20,32 @@ const getCharts = async function () {
   return res.data
 }
 
+const createCharts = async (args) => {
+  const url = 'https://open.feishu.cn/open-apis/im/v1/chats?user_id_type&set_bot_manager=true'
+  const res = await this.axios.post(url, args)
+
+  return res.data
+}
+
+const deleteCharts = async (chat_id) => {
+  const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}`
+  const res = await this.axios.delete(url)
+
+  return res.data
+}
+
+const addMembers = async (chat_id, id_list) => {
+  const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members?member_id_type=user_id`
+  const res = await this.axios.post(url, {
+    id_list,
+  })
+
+  return res.data
+}
+
 module.exports = {
   putMessageTop,
   getCharts,
+  createCharts,
+  deleteCharts,
 }

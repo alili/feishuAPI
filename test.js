@@ -55,19 +55,7 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
   const FAPI = FSDK('cli_a2609958b8f9900b', 'P0E6uiiO8KwcVpl9PHhl7ef7GUknEzvW')
   FAPI.setToken((await FAPI.getTenantToken()).tenant_access_token)
 
-  let res = await FAPI.sendMessage(
-    'oc_f55f0646739abcb384badd695fea2b26',
-    makeQuestionCard({
-      question: '111',
-      acRate: '65.32',
-      submit: 29837,
-      questionName: 'two-sum',
-      tags: '数学',
-      question_id: 1,
-      title: '两数之和',
-    }),
-    'interactive'
-  )
+  let res = await FAPI.getUserInfo('e6288gb4')
 
   console.log(`res:`, res)
 })()
