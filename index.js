@@ -3,7 +3,7 @@ const auth = require('./auth')
 const chats = require('./chats')
 const message = require('./message')
 const user = require('./user')
-
+const image = require('./image')
 module.exports = function (app_id, app_secret) {
   function FAPI(app_id, app_secret) {
     this.app_id = app_id
@@ -16,6 +16,7 @@ module.exports = function (app_id, app_secret) {
       ...chats,
       ...message,
       ...user,
+      ...image,
     }
   }
 
