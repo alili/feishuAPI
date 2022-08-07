@@ -1,4 +1,4 @@
-const FromData = require('form-data')
+const FormData = require('form-data')
 
 async function uploadImage({ type, url }) {
   const formData = new FormData()
