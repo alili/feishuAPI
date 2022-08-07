@@ -1,3 +1,5 @@
+const FromData = require('form-data')
+
 async function uploadImage({ type, url }) {
   const formData = new FormData()
   let image = await this.axios({
