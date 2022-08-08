@@ -37,14 +37,14 @@ const createChats = async function (args) {
   }
 }
 
-const deleteChats = async (chat_id) => {
+const deleteChats = async function (chat_id) {
   const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}`
   const res = await this.axios.delete(url)
 
   return res.data
 }
 
-const addMembers = async (chat_id, id_list) => {
+const addMembers = async function (chat_id, id_list) {
   const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members?member_id_type=user_id`
   const res = await this.axios.post(url, {
     id_list,
