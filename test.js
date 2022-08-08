@@ -55,7 +55,11 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
   const FAPI = FSDK('cli_a1360c412078900c', 'fkwUdGa2HBzqNXD1cgvsCcC37IayFjpR')
   FAPI.setToken((await FAPI.getTenantToken()).tenant_access_token)
 
-  let res = await FAPI.create()
+  let chats = await FAPI.createChats({
+    user_id_list: ['e6288gb4'],
+    owner_id: 'e6288gb4',
+    name: `test 发起的挑战`,
+  })
 
-  console.log(`res:`, res.data.items)
+  console.log(`res:`, chats)
 })()

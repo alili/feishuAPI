@@ -46,11 +46,15 @@ const deleteChats = async function (chat_id) {
 
 const addMembers = async function (chat_id, id_list) {
   const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members?member_id_type=user_id`
-  const res = await this.axios.post(url, {
-    id_list,
-  })
+  try {
+    const res = await this.axios.post(url, {
+      id_list,
+    })
 
-  return res.data
+    return res.data
+  } catch (error) {
+    return error
+  }
 }
 
 module.exports = {
