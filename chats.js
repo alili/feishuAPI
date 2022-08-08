@@ -29,9 +29,12 @@ const getMembers = async function () {
 
 const createCharts = async function (args) {
   const url = 'https://open.feishu.cn/open-apis/im/v1/chats?user_id_type=user_id&set_bot_manager=true'
-  const res = await this.axios.post(url, args)
-
-  return res.data
+  try {
+    const res = await this.axios.post(url, args)
+    return res.data
+  } catch (error) {
+    return error
+  }
 }
 
 const deleteCharts = async (chat_id) => {
