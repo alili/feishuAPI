@@ -52,10 +52,10 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
   }
 }
 ;(async () => {
-  const FAPI = FSDK('cli_a2609958b8f9900b', 'P0E6uiiO8KwcVpl9PHhl7ef7GUknEzvW')
+  const FAPI = FSDK('cli_a1360c412078900c', 'fkwUdGa2HBzqNXD1cgvsCcC37IayFjpR')
   FAPI.setToken((await FAPI.getTenantToken()).tenant_access_token)
 
-  let res = await FAPI.getUserInfo('e6288gb4')
+  let res = await FAPI.create()
 
-  console.log(`res:`, res)
+  console.log(`res:`, res.data.items)
 })()
