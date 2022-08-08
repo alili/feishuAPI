@@ -20,6 +20,13 @@ const getCharts = async function () {
   return res.data
 }
 
+const getMembers = async function () {
+  const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members`
+  const res = await this.axios.get(url)
+
+  return res.data
+}
+
 const createCharts = async (args) => {
   const url = 'https://open.feishu.cn/open-apis/im/v1/chats?user_id_type&set_bot_manager=true'
   const res = await this.axios.post(url, args)
@@ -46,6 +53,8 @@ const addMembers = async (chat_id, id_list) => {
 module.exports = {
   putMessageTop,
   getCharts,
+  getMembers,
   createCharts,
   deleteCharts,
+  addMembers,
 }
