@@ -7,3 +7,7 @@ const im_message_receive_v1 = function ({ header, event: { message, sender } }, 
     sender,
   })
 }
+
+module.exports = {
+  im_message_receive_v1,
+}
