@@ -16,7 +16,7 @@
 ### chats
 #### putMessageTop
 > 消息置顶
-#### getCharts
+#### getChats
 > 获取所有群组
 
 ### message
