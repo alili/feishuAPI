@@ -55,11 +55,9 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
   const FAPI = FSDK('cli_a1360c412078900c', 'fkwUdGa2HBzqNXD1cgvsCcC37IayFjpR')
   FAPI.setToken((await FAPI.getTenantToken()).tenant_access_token)
 
-  let chats = await FAPI.createChats({
-    user_id_list: ['e6288gb4'],
-    owner_id: 'e6288gb4',
-    name: `test 发起的挑战`,
-  })
+  let chatsList = await FAPI.getChats()
+  console.log(`chatsList:`, chatsList.data.items)
+  // let chats = await FAPI.addManagers('oc_c353527c0a143767715fbfa36138448e', ['cli_a1360c412078900c'], 'app_id')
 
-  console.log(`res:`, chats)
+  // console.log(`res:`, JSON.stringify(chats.response.data))
 })()

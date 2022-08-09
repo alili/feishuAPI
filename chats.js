@@ -57,11 +57,22 @@ const addMembers = async function (chat_id, id_list) {
   }
 }
 
+const addManagers = async function (chat_id, manager_ids, type = 'user_id') {
+  const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/managers/add_managers?member_id_type=${type}`
+  try {
+    const res = await this.axios.post(url, {
+      manager_ids,
+    })
+  } catch (error) {
+    return error
+  }
+}
 module.exports = {
   putMessageTop,
   getChats,
   getMembers,
   createChats,
   deleteChats,
+  addManagers,
   addMembers,
 }

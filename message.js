@@ -1,5 +1,6 @@
 const sendTextMessage = async function (receive_id, text) {
-  const url = 'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=user_id'
+  const receive_id_type = /^oc/.test(receive_id) ? 'chat_id' : 'user_id'
+  const url = `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=${receive_id_type}`
   try {
     let res = await this.axios.post(url, {
       receive_id,
