@@ -5,6 +5,7 @@ const message = require('./message')
 const user = require('./user')
 const image = require('./image')
 const event = require('./event')
+const bitable = require('./bitable')
 module.exports = function (app_id, app_secret) {
   function FAPI(app_id, app_secret) {
     this.app_id = app_id
@@ -19,6 +20,7 @@ module.exports = function (app_id, app_secret) {
       ...user,
       ...image,
       ...event,
+      ...bitable,
     }
   }
 
