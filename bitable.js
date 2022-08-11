@@ -7,3 +7,7 @@ const bitableAddRecords = async function (app_token, table_id, fields) {
     return error
   }
 }
+
+module.exports = {
+  bitableAddRecords,
+}
