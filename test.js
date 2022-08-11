@@ -52,10 +52,10 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
   }
 }
 ;(async () => {
-  const FAPI = FSDK('cli_a1360c412078900c', 'fkwUdGa2HBzqNXD1cgvsCcC37IayFjpR')
+  const FAPI = FSDK('cli_a27ecbb84679900d', '798n7A6QLoPHt7GX5BOwZgZNt33HWEX4')
   FAPI.setToken((await FAPI.getTenantToken()).tenant_access_token)
 
-  let chatsList = await FAPI.getChats()
+  let chatsList = await FAPI.bitableAddRecords('bascnfHgoh8uXhcwwFxCKJNoCWh', 'tblqDr92aGmkNd8v', [{}])
   console.log(`chatsList:`, chatsList.data.items)
   // let chats = await FAPI.addManagers('oc_c353527c0a143767715fbfa36138448e', ['cli_a1360c412078900c'], 'app_id')
 
