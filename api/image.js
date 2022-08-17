@@ -1,4 +1,5 @@
 const FormData = require('form-data')
+const { http } = require('../client')
 
 async function upload({ type, url }) {
   const formData = new FormData()
@@ -9,7 +10,7 @@ async function upload({ type, url }) {
   })
   formData.append('image', image.data)
   formData.append('image_type', type || 'message')
-  const { data: res } = await this.axios.post('https://open.feishu.cn/open-apis/im/v1/images', formData, {
+  const { data: res } = await http.post('https://open.feishu.cn/open-apis/im/v1/images', formData, {
     headers: formData.getHeaders(),
   })
   if (res.code) {
