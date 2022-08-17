@@ -1,6 +1,6 @@
 const FormData = require('form-data')
 
-async function uploadImage({ type, url }) {
+async function upload({ type, url }) {
   const formData = new FormData()
   let image = await this.axios({
     url: url,
@@ -19,5 +19,5 @@ async function uploadImage({ type, url }) {
 }
 
 module.exports = {
-  uploadImage,
+  upload,
 }

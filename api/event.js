@@ -1,3 +1,5 @@
+const { http } = require('../client')
+
 const im_message_receive_v1 = async function ({ header, event: { message, sender } }, actions) {
   return await actions({
     ...message,
