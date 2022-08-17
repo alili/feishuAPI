@@ -32,6 +32,7 @@ const deleteMessage = async function (messageId) {
   return res.data
 }
 
+const sendEphemeralMessage = async function (chat_id, receive_id, card) {
 module.exports = {
   sendTextMessage,
   sendMessage,
