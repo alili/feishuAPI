@@ -54,22 +54,19 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
 ;(async () => {
   const FAPI = await FSDK('cli_a2609958b8f9900b', 'P0E6uiiO8KwcVpl9PHhl7ef7GUknEzvW')
   const elements = FAPI.tools.makeElements([
-    '![图片](img_v2_b60e8bed-fb1f-4385-bdc0-e4840f1c59fg)',
-    'xxx 向群友发起挑战\n挑战难度为 【easy】',
+    '@e6288gb4 向群友发起挑战\n挑战难度为 【easy】',
     '---',
-    '报名人数 *7/8*',
-    ['text', '报名人数', '*7/8*'],
     ['note', '![图片](img_v2_b60e8bed-fb1f-4385-bdc0-e4840f1c59fg)', '备注消息'],
+    ['list', '深度整合使用率极高的办公工具，企业成员在一处即可实现高效沟通与协作。', '!b:p[title](http://baidu.com)'],
     [
-      'text-image',
+      'list',
       '深度整合使用率极高的办公工具，企业成员在一处即可实现高效沟通与协作。',
-      '!b:p[title](http://baidu.com)',
+      '![图片](img_v2_b60e8bed-fb1f-4385-bdc0-e4840f1c59fg)',
     ],
-    ['button', '!b:p[title](http://baidu.com)', '!b:d[title]({ "name": "nemo" })'],
   ])
 
   console.log(`elements:`, elements)
-  let res = await FAPI.message.sendCard('e6288gb4', {
+  let res = await FAPI.message.sendCard('oc_0f8a7eda0d141bf9bca603b1240a2879', {
     header: {
       template: 'red',
       title: {
