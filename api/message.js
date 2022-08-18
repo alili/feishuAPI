@@ -10,7 +10,7 @@ const send = async function (receive_id, content, msg_type = 'text') {
   })
   return res.data
 }
-const updateCard = async function (messageId, card) {
+const updateCard = async function (message_id, card) {
   const url = `https://open.feishu.cn/open-apis/im/v1/messages/${message_id}`
   const res = await http.patch(url, {
     content: JSON.stringify(card),

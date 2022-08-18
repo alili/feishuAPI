@@ -110,7 +110,15 @@ const makeElements = (elements) => {
     }
   })
 }
+const makeHeader = (template, content) => ({
+  template,
+  title: {
+    content,
+    tag: 'plain_text',
+  },
+})
 
 module.exports = {
   makeElements,
+  makeHeader,
 }
