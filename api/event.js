@@ -1,15 +1,14 @@
-const { http } = require('../client')
+const events = {}
 
-const im_message_receive_v1 = async function ({ header, event: { message, sender } }, actions) {
-  return await actions({
-    ...message,
-    user_id: sender.sender_id.user_id,
-    msg: JSON.parse(message.content).text,
-    header,
-    sender,
-  })
+const add = async function (type, fun) {
+  events[type] = fun
+}
+
+const listen = async function (actions) {
+  return await events[actions]()
 }
 
 module.exports = {
-  im_message_receive_v1,
+  add,
+  listen,
 }
