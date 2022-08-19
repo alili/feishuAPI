@@ -8,7 +8,7 @@ const send = async function (receive_id, content, msg_type = 'text') {
     content: JSON.stringify(content),
     msg_type,
   })
-  return res.data
+  return res.data.data
 }
 const updateCard = async function (message_id, card) {
   const url = `https://open.feishu.cn/open-apis/im/v1/messages/${message_id}`
@@ -16,7 +16,7 @@ const updateCard = async function (message_id, card) {
     content: JSON.stringify(card),
   })
 
-  return res.data
+  return res.data.data
 }
 
 const sendEphemeralCard = async function (chat_id, user_id, card) {
