@@ -121,11 +121,8 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
   //   elements,
   // })
 
-  FAPI.event.keyword('test (.*)', async (title) => {
-    console.log(`title:`, title)
-  })
-  FAPI.event.keyword('(.*)', async (title) => {
-    console.log(`title2:`, title)
+  FAPI.event.add('im.message.receive_v1', async (title) => {
+    console.log(`title:`, 1)
   })
 
   await FAPI.event.listen(body)

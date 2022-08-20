@@ -1,13 +1,14 @@
 const events = {}
 const keywords = {}
 
-const add = async function (type, fun) {
+const add = function (type, fun) {
   events[type] = fun
 }
 
 const listen = async function ({ header, event: { message, sender } } = {}) {
   if (header.event_type === 'im.message.receive_v1') {
     const msg = JSON.parse(message.content).text
+
     let event = Object.entries(keywords).find(([keyword]) => new RegExp(keyword).test(msg))
     if (event) {
       return await event[1](...new RegExp(event[0]).exec(msg).slice(1))
