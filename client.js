@@ -1,8 +1,13 @@
 const axios = require('axios')
 
+let indate = 0
 // 添加请求拦截器
 axios.interceptors.request.use(
-  function (config) {
+  async function (config) {
+    if (indate < new Date().getTime()) {
+      token = await getTenantToken()
+      setToken(token)
+    }
     return config
   },
   function (error) {
@@ -26,11 +31,11 @@ const getTenantToken = async function (app_id, app_secret) {
     app_id: app_id || this.app_id,
     app_secret: app_secret || this.app_secret,
   })
+  indate = new Date().getTime() + res.data.expire * 1000
   return res.data
 }
 
 const setToken = function (token) {
-  // TODO 处理超时
   token = token.tenant_access_token
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
