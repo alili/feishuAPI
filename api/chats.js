@@ -12,6 +12,22 @@ const putMessageTop = async function (chat_id, message_id) {
   })
   return res.data
 }
+
+const pin = async function (message_id) {
+  const url = `https://open.feishu.cn/open-apis/im/v1/pins`
+  const res = await http.post(url, {
+    message_id,
+  })
+  return res.data
+}
+
+const unpin = async function (message_id) {
+  const url = `https://open.feishu.cn/open-apis/im/v1/pins/${message_id}`
+  const res = await http.delete(url)
+
+  return res.data
+}
+
 const get = async function () {
   const url = 'https://open.feishu.cn/open-apis/im/v1/chats'
   const res = await http.get(url)
@@ -61,4 +77,6 @@ module.exports = {
   getMembers,
   addManagers,
   addMembers,
+  pin,
+  unpin,
 }
