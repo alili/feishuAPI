@@ -4,7 +4,7 @@ let indate = 0
 // 添加请求拦截器
 axios.interceptors.request.use(
   async function (config) {
-    if (indate < new Date().getTime()) {
+    if (!/auth/.test(config.url) && indate < new Date().getTime()) {
       token = await getTenantToken()
       setToken(token)
     }
