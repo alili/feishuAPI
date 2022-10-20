@@ -86,7 +86,7 @@ const makeElements = (elements) => {
         case 'note':
           return {
             tag: 'note',
-            elements: element.map((item) => _translateTextToCard(item, 'plain_text')),
+            elements: element.map((item) => _translateTextToCard(item, 'lark_md')),
           }
         case 'button':
           return {
