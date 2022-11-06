@@ -1,5 +1,5 @@
 const FSDK = require('./index.js')
-const dayjs = require('dayjs')
+const sleep = require('sleep')
 
 const makeQuestionCard = function ({ question, submit, acRate, tags, questionName, question_id, title }) {
   return {
@@ -52,62 +52,35 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
   }
 }
 ;(async () => {
-  const FAPI = await FSDK('cli_a2609958b8f9900b', 'P0E6uiiO8KwcVpl9PHhl7ef7GUknEzvW')
-  const body = {
-    schema: '2.0',
-    header: {
-      event_id: '5e3702a84e847582be8db7fb73283c02',
-      event_type: 'im.message.receive_v1',
-      create_time: '1608725989000',
-      token: 'rvaYgkND1GOiu5MM0E1rncYC6PLtF7JV',
-      app_id: 'cli_9f5343c580712544',
-      tenant_key: '2ca1d211f64f6438',
-    },
-    event: {
-      sender: {
-        sender_id: {
-          union_id: 'on_8ed6aa67826108097d9ee143816345',
-          user_id: 'e33ggbyz',
-          open_id: 'ou_84aad35d084aa403a838cf73ee18467',
-        },
-        sender_type: 'user',
-        tenant_key: '736588c9260f175e',
-      },
-      message: {
-        message_id: 'om_5ce6d572455d361153b7cb51da133945',
-        root_id: 'om_5ce6d572455d361153b7cb5xxfsdfsdfdsf',
-        parent_id: 'om_5ce6d572455d361153b7cb5xxfsdfsdfdsf',
-        create_time: '1609073151345',
-        chat_id: 'oc_5ce6d572455d361153b7xx51da133945',
-        chat_type: 'group',
-        message_type: 'text',
-        content: '{"text":"tedst 12s3"}',
-        mentions: [
-          {
-            key: '@_user_1',
-            id: {
-              union_id: 'on_8ed6aa67826108097d9ee143816345',
-              user_id: 'e33ggbyz',
-              open_id: 'ou_84aad35d084aa403a838cf73ee18467',
-            },
-            name: 'Tom',
-            tenant_key: '736588c9260f175e',
-          },
-        ],
-      },
-    },
-  }
-  const elements = FAPI.tools.makeElements([
-    '@e6288gb4 向群友发起挑战\n挑战难度为 【easy】',
-    '---',
-    ['note', '![图片](img_v2_b60e8bed-fb1f-4385-bdc0-e4840f1c59fg)', '备注消息'],
-    ['list', '深度整合使用率极高的办公工具，企业成员在一处即可实现高效沟通与协作。', '!b:p[title](http://baidu.com)'],
-    [
-      'list',
-      '深度整合使用率极高的办公工具，企业成员在一处即可实现高效沟通与协作。',
-      '![图片](img_v2_b60e8bed-fb1f-4385-bdc0-e4840f1c59fg)',
-    ],
-  ])
+  const FAPI = await FSDK('cli_a27af43160f8d00c', 'etF4fNxZAF7NEVuKA8EzmfrqR27qGnYX')
+
+  const data = await FAPI.bitable.getRecords('bascngugf5wIbODzT0hxtDTl64e', 'tbldt4amzaq6boO2', 500, '')
+
+  const {
+    data: { items },
+  } = data
+
+  let res = items[Math.floor(Math.random() * items.length)].fields
+  await FAPI.message.sendCard('e6288gb4', {
+    header: FAPI.tools.makeHeader('red', '今天读这篇内容'),
+    elements: FAPI.tools.makeElements([
+      `**[标题]**： ${res.标题}`,
+      `**[链接]**： [${res.链接.text}](${res.链接.link})`,
+      `**[为什么值得你读]**： ${res.推荐语}`,
+    ]),
+  })
+  // https://yellowduck.feishu.cn/base/bascngugf5wIbODzT0hxtDTl64e?table=tbldt4amzaq6boO2&view=vewO3yw2tp
+  // const elements = FAPI.tools.makeElements([
+  //   '@e6288gb4 向群友发起挑战\n挑战难度为 【easy】',
+  //   '---',
+  //   ['note', '![图片](img_v2_b60e8bed-fb1f-4385-bdc0-e4840f1c59fg)', '备注消息'],
+  //   ['list', '深度整合使用率极高的办公工具，企业成员在一处即可实现高效沟通与协作。', '!b:p[title](http://baidu.com)'],
+  //   [
+  //     'list',
+  //     '深度整合使用率极高的办公工具，企业成员在一处即可实现高效沟通与协作。',
+  //     '![图片](img_v2_b60e8bed-fb1f-4385-bdc0-e4840f1c59fg)',
+  //   ],
+  // ])
 
   // console.log(`elements:`, elements)
   // let res = await FAPI.message.sendCard('oc_0f8a7eda0d141bf9bca603b1240a2879', {
@@ -121,9 +94,9 @@ const makeQuestionCard = function ({ question, submit, acRate, tags, questionNam
   //   elements,
   // })
 
-  FAPI.event.add('im.message.receive_v1', async (title) => {
-    console.log(`title:`, 1)
-  })
+  // FAPI.event.add('im.message.receive_v1', async (title) => {
+  //   console.log(`title:`, 1)
+  // })
 
-  await FAPI.event.listen(body)
+  // await FAPI.event.listen(body)
 })()
