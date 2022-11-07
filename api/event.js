@@ -5,7 +5,7 @@ const add = function (type, fun) {
   events[type] = fun
 }
 
-const listen = async function ({ header, event: { message, sender } } = {}) {
+const listen = async function ({ header, event: { message, sender } } = {}, channel = '') {
   if (header.event_type === 'im.message.receive_v1') {
     const msg = JSON.parse(message.content).text
 
@@ -14,7 +14,7 @@ const listen = async function ({ header, event: { message, sender } } = {}) {
       return await event[1](...new RegExp(event[0]).exec(msg).slice(1))
     }
   }
-  return await events[header.event_type]({ header, event: { message, sender } })
+  return await events[channel || header.event_type]({ header, event: { message, sender } })
 }
 
 const keyword = async function (keyword, fun) {
