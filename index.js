@@ -7,6 +7,7 @@ const user = require('./api/user')
 const image = require('./api/image')
 const event = require('./api/event')
 const bitable = require('./api/bitable')
+const spreadsheets = require('./api/spreadsheets')
 
 // tools
 const tools = require('./tools')
@@ -33,6 +34,7 @@ module.exports = async function (app_id, app_secret, config = {}) {
       image,
       event,
       bitable,
+      spreadsheets,
       tools,
     }
   }
