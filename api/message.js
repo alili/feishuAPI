@@ -8,6 +8,11 @@ const send = async function (receive_id, content, msg_type = 'text') {
     content: JSON.stringify(content),
     msg_type,
   })
+
+  if (res.data.code !== 0) {
+    throw new Error(res.data)
+  }
+
   return res.data.data
 }
 const updateCard = async function (message_id, card) {
