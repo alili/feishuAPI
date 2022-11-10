@@ -108,7 +108,7 @@ const makeElements = (elements, config = {}) => {
           break
       }
     } else {
-      return _translateTextToCard(element, null, config)
+      return _translateTextToCard(element, 'markdown', config)
     }
   })
 }
