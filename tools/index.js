@@ -4,8 +4,10 @@ const _translateAtUser = (text) => {
   })
 }
 
-const _translateTextToCard = (text, tag = 'markdown') => {
-  text = _translateAtUser(text)
+const _translateTextToCard = (text, tag = 'markdown', config = {}) => {
+  if (!config.withoutAt) {
+    text = _translateAtUser(text)
+  }
   // 分割线
   if (text === '---') {
     return {
@@ -58,7 +60,7 @@ const _translateTextToCard = (text, tag = 'markdown') => {
     }
   }
 }
-const makeElements = (elements) => {
+const makeElements = (elements, config = {}) => {
   return elements.map((element) => {
     if (Array.isArray(element)) {
       let type = element.shift()
@@ -106,7 +108,7 @@ const makeElements = (elements) => {
           break
       }
     } else {
-      return _translateTextToCard(element)
+      return _translateTextToCard(element, null, config)
     }
   })
 }
