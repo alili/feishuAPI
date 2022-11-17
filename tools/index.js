@@ -104,6 +104,19 @@ const makeElements = (elements, config = {}) => {
             },
             extra: _translateTextToCard(element[1]),
           }
+        case 'column_set':
+          return {
+            tag: 'column_set',
+            flex_mode: 'flow',
+            background_style: 'default',
+            columns: element.map(([content, weight = 1, vertical_align = 'center']) => ({
+              tag: 'column',
+              width: 'weighted',
+              weight,
+              vertical_align,
+              elements: [_translateTextToCard(content)],
+            })),
+          }
         default:
           break
       }
