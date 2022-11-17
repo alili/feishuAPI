@@ -4,7 +4,9 @@ const _translateAtUser = (text) => {
   })
 }
 
-const _translateTextToCard = (text, tag = 'markdown', config = {}) => {
+const _translateTextToCard = (content, tag = 'markdown', config = {}) => {
+  let [text, meta = ''] = content.split('|')
+
   if (!config.withoutAt) {
     text = _translateAtUser(text)
   }
@@ -57,6 +59,7 @@ const _translateTextToCard = (text, tag = 'markdown', config = {}) => {
     return {
       tag,
       content: text,
+      text_align: meta.match(/left|right|center/g)?.[0] || 'left',
     }
   }
 }
