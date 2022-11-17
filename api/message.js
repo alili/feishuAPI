@@ -1,19 +1,29 @@
 const { http } = require('../client')
 
 const send = async function (receive_id, content, msg_type = 'text') {
-  const receive_id_type = /^oc/.test(receive_id) ? 'chat_id' : 'user_id'
-  const url = `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=${receive_id_type}`
-  const res = await http.post(url, {
-    receive_id,
-    content: JSON.stringify(content),
-    msg_type,
-  })
+  const isWebhook = /https?:\/\//.test(receive_id)
 
-  if (res.data.code !== 0) {
-    return res.data
+  if (isWebhook) {
+    const res = await http.post(receive_id, {
+      [msg_type === 'interactive' ? 'card' : 'content']: content,
+      msg_type,
+    })
+    return res.data.data
+  } else {
+    const receive_id_type = /^oc/.test(receive_id) ? 'chat_id' : 'user_id'
+    const url = `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=${receive_id_type}`
+    const res = await http.post(url, {
+      receive_id,
+      content: JSON.stringify(content),
+      msg_type,
+    })
+
+    if (res.data.code !== 0) {
+      return res.data
+    }
+
+    return res.data.data
   }
-
-  return res.data.data
 }
 const updateCard = async function (message_id, card) {
   const url = `https://open.feishu.cn/open-apis/im/v1/messages/${message_id}`
