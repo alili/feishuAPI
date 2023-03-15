@@ -1,5 +1,11 @@
 const { http } = require('../client')
 
+const getMessage = async function (message_id) {
+  const url = `https://open.feishu.cn/open-apis/im/v1/messages/${message_id}`
+  const res = await http.get(url)
+
+  return res.data
+}
 const send = async function (receive_id, content, msg_type = 'text') {
   const isWebhook = /https?:\/\//.test(receive_id)
 
@@ -74,4 +80,5 @@ module.exports = {
   removeEphemeralCard,
   sendText,
   sendCard,
+  getMessage,
 }
