@@ -54,9 +54,17 @@ const remove = async function (chat_id) {
   return res.data
 }
 
-const addMembers = async function (chat_id, id_list) {
-  const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members?member_id_type=user_id`
+const addMembers = async function (chat_id, id_list, type = 'user_id') {
+  const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members?member_id_type=${type}`
   const res = await http.post(url, {
+    id_list,
+  })
+
+  return res.data
+}
+const removeMembers = async function (chat_id, id_list, type = 'user_id') {
+  const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members?member_id_type=${type}`
+  const res = await http.delete(url, {
     id_list,
   })
 
@@ -68,7 +76,15 @@ const addManagers = async function (chat_id, manager_ids, type = 'user_id') {
   const res = await http.post(url, {
     manager_ids,
   })
+
+  return res.data
 }
+
+// sugar
+const moveMembers = async function (from, to, id_list, type = 'user_id') {
+  return await Promise.all([addMembers(to, id_list, type), removeMembers(from, id_list, type)])
+}
+
 module.exports = {
   create,
   get,
@@ -77,6 +93,8 @@ module.exports = {
   getMembers,
   addManagers,
   addMembers,
+  removeMembers,
+  moveMembers,
   pin,
   unpin,
 }

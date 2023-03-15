@@ -64,7 +64,7 @@ const remove = async function (messageId) {
   return res.data
 }
 
-// suger
+// sugar
 const sendText = async function (receive_id, text) {
   return await send(receive_id, { text })
 }
