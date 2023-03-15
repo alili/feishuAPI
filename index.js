@@ -41,3 +41,5 @@ module.exports = async function (app_id, app_secret, config = {}) {
 
   return new FAPI(app_id, app_secret)
 }
+
+module.exports.tools = tools

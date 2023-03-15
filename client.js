@@ -26,6 +26,7 @@ axios.interceptors.response.use(
 )
 
 const getTenantToken = async function (app_id, app_secret) {
+  console.log(`res:`, app_id, app_secret)
   const url = 'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal'
   const res = await axios.post(url, {
     app_id: app_id || this.app_id,
