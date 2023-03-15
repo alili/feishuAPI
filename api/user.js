@@ -11,6 +11,20 @@ const getInfo = async function (user_id, user_id_type = 'user_id', department_id
   return res.data
 }
 
+const update = async function (user_id, data, user_id_type = 'user_id', department_id_type = 'department_id') {
+  const url = `https://open.feishu.cn/open-apis/contact/v3/users/${user_id}`
+  const res = await http.patch(url, {
+    params: {
+      user_id_type,
+      department_id_type,
+    },
+    data,
+  })
+
+  return res.data
+}
+
 module.exports = {
   getInfo,
+  update,
 }
