@@ -32,7 +32,7 @@ const getTenantToken = async function (app_id, app_secret) {
 
   console.log(`res:`, res)
   indate = new Date().getTime() + res.expire * 1000
-  return await res.json()
+  return res
 }
 
 const setToken = function (token) {
