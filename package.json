@@ -1,6 +1,6 @@
 {
   "name": "feishu-sdk",
-  "version": "2.2.26",
+  "version": "2.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
