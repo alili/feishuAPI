@@ -31,7 +31,6 @@ const updateRecords = async function (app_token, table_id, record_id, fields) {
     const res = await http.post(batch_url, {
       records: record_id
     })
-    console.log(`batch_url:`, batch_url)
     return await res.json()
   } else {
     const res = await http.put(url, { fields })

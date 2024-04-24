@@ -17,7 +17,6 @@ axios.interceptors.request.use(
 )
 
 const getTenantToken = async function (app_id, app_secret) {
-  console.log(`this.app_id, this.app_secret:`, this.app_id, this.app_secret, app_id, app_secret)
   const url = 'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal'
   const res = await (await fetch(url, {
     method: 'POST',
@@ -30,7 +29,6 @@ const getTenantToken = async function (app_id, app_secret) {
     })
   })).json()
 
-  console.log(`res:`, res)
   indate = new Date().getTime() + res.expire * 1000
   return res
 }
@@ -50,7 +48,6 @@ const client = {
     })
   },
   post: async function (url, data) {
-    console.log(`data, JSON.stringify(data):`, data, JSON.stringify(data))
     return fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
