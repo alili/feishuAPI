@@ -1,6 +1,7 @@
 const axios = require('axios')
 
 let indate = 0
+let Authorization = ''
 // 添加请求拦截器
 axios.interceptors.request.use(
   async function (config) {
@@ -15,33 +16,53 @@ axios.interceptors.request.use(
   }
 )
 
-// 添加响应拦截器
-axios.interceptors.response.use(
-  function (response) {
-    return response
-  },
-  function (error) {
-    return error.response
-  }
-)
-
 const getTenantToken = async function (app_id, app_secret) {
+  console.log(`this.app_id, this.app_secret:`, this.app_id, this.app_secret, app_id, app_secret)
   const url = 'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal'
-  const res = await axios.post(url, {
-    app_id: app_id || this.app_id,
-    app_secret: app_secret || this.app_secret,
-  })
-  indate = new Date().getTime() + res.data.expire * 1000
-  return res.data
+  const res = await (await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({
+      app_id: app_id || this.app_id,
+      app_secret: app_secret || this.app_secret,
+    })
+  })).json()
+
+  console.log(`res:`, res)
+  indate = new Date().getTime() + res.expire * 1000
+  return await res.json()
 }
 
 const setToken = function (token) {
   token = token.tenant_access_token
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  Authorization = `Bearer ${token}`
+}
+
+const client = {
+  get: async function (url) {
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization,
+      },
+    })
+  },
+  post: async function (url, data) {
+    console.log(`data, JSON.stringify(data):`, data, JSON.stringify(data))
+    return fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        Authorization,
+      },
+    })
+  },
 }
 
 module.exports = {
   getTenantToken,
   setToken,
-  http: axios,
+  http: client,
 }

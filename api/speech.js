@@ -18,7 +18,7 @@ const startStream = async function (speech) {
       engine_type: '16k_auto',
     },
   })
-  return res.data.data
+  return await res.json().data
 }
 
 module.exports = { startStream }

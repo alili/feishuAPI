@@ -10,7 +10,7 @@ const putMessageTop = async function (chat_id, message_id) {
       },
     ],
   })
-  return res.data
+  return await res.json()
 }
 
 const pin = async function (message_id) {
@@ -18,40 +18,40 @@ const pin = async function (message_id) {
   const res = await http.post(url, {
     message_id,
   })
-  return res.data
+  return await res.json()
 }
 
 const unpin = async function (message_id) {
   const url = `https://open.feishu.cn/open-apis/im/v1/pins/${message_id}`
   const res = await http.delete(url)
 
-  return res.data
+  return await res.json()
 }
 
 const get = async function () {
   const url = 'https://open.feishu.cn/open-apis/im/v1/chats'
   const res = await http.get(url)
-  return res.data
+  return await res.json()
 }
 
 const getMembers = async function () {
   const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members`
   const res = await http.get(url)
 
-  return res.data
+  return await res.json()
 }
 
 const create = async function (args) {
   const url = 'https://open.feishu.cn/open-apis/im/v1/chats?user_id_type=user_id&set_bot_manager=true'
   const res = await http.post(url, args)
-  return res.data
+  return await res.json()
 }
 
 const remove = async function (chat_id) {
   const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}`
   const res = await http.delete(url)
 
-  return res.data
+  return await res.json()
 }
 
 const addMembers = async function (chat_id, id_list, type = 'user_id') {
@@ -60,7 +60,7 @@ const addMembers = async function (chat_id, id_list, type = 'user_id') {
     id_list,
   })
 
-  return res.data
+  return await res.json()
 }
 const removeMembers = async function (chat_id, id_list, type = 'user_id') {
   const url = `https://open.feishu.cn/open-apis/im/v1/chats/${chat_id}/members?member_id_type=${type}`
@@ -68,7 +68,7 @@ const removeMembers = async function (chat_id, id_list, type = 'user_id') {
     id_list,
   })
 
-  return res.data
+  return await res.json()
 }
 
 const addManagers = async function (chat_id, manager_ids, type = 'user_id') {
@@ -77,7 +77,7 @@ const addManagers = async function (chat_id, manager_ids, type = 'user_id') {
     manager_ids,
   })
 
-  return res.data
+  return await res.json()
 }
 
 // sugar

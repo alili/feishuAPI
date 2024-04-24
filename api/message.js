@@ -4,7 +4,7 @@ const getMessage = async function (message_id) {
   const url = `https://open.feishu.cn/open-apis/im/v1/messages/${message_id}`
   const res = await http.get(url)
 
-  return res.data
+  return await res.json()
 }
 const send = async function (receive_id, content, msg_type = 'text') {
   const isWebhook = /https?:\/\//.test(receive_id)
@@ -14,21 +14,21 @@ const send = async function (receive_id, content, msg_type = 'text') {
       [msg_type === 'interactive' ? 'card' : 'content']: content,
       msg_type,
     })
-    return res.data.data
+    return await res.json().data
   } else {
     const receive_id_type = /^oc/.test(receive_id) ? 'chat_id' : 'user_id'
     const url = `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=${receive_id_type}`
     const res = await http.post(url, {
       receive_id,
-      content: JSON.stringify(content),
+      content: JSON.stringify(msg_type === 'text' ? { text: content } : content),
       msg_type,
     })
 
-    if (res.data.code !== 0) {
-      return res.data
+    if (res.code !== 0) {
+      return await res.json()
     }
 
-    return res.data.data
+    return await res.json().data
   }
 }
 const updateCard = async function (message_id, card) {
@@ -37,7 +37,7 @@ const updateCard = async function (message_id, card) {
     content: JSON.stringify(card),
   })
 
-  return res.data.data
+  return await res.json().data
 }
 
 const sendEphemeralCard = async function (chat_id, user_id, card) {
@@ -48,20 +48,20 @@ const sendEphemeralCard = async function (chat_id, user_id, card) {
     msg_type: 'interactive',
     card,
   })
-  return res.data
+  return await res.json()
 }
 const removeEphemeralCard = async function (message_id) {
   const url = `https://open.feishu.cn/open-apis/ephemeral/v1/delete`
   const res = await http.post(url, {
     message_id,
   })
-  return res.data
+  return await res.json()
 }
 
 const remove = async function (messageId) {
   const url = `https://open.feishu.cn/open-apis/im/v1/messages/${messageId}`
   const res = await http.delete(url)
-  return res.data
+  return await res.json()
 }
 
 // sugar

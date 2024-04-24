@@ -16,7 +16,7 @@ async function upload({ type, url }) {
   if (res.code) {
     return false
   }
-  return res.data.image_key
+  return await res.json().image_key
 }
 
 module.exports = {

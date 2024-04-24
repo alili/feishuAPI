@@ -6,7 +6,7 @@ const getTenantToken = async function () {
     app_id: this.app_id,
     app_secret: this.app_secret,
   })
-  return res.data
+  return await res.json()
 }
 const setToken = function (token) {
   http.defaults.headers.common['Authorization'] = `Bearer ${token}`

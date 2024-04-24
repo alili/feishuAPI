@@ -8,7 +8,7 @@ const getInfo = async function (user_id, user_id_type = 'user_id', department_id
       department_id_type,
     },
   })
-  return res.data
+  return await res.json()
 }
 
 const update = async function (user_id, data, user_id_type = 'user_id', department_id_type = 'department_id') {
@@ -20,7 +20,7 @@ const update = async function (user_id, data, user_id_type = 'user_id', departme
     },
   })
 
-  return res.data
+  return await res.json()
 }
 
 module.exports = {
